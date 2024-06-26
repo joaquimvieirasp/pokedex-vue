@@ -13,6 +13,10 @@
     transform: scale(1.1, 1.1);
 }
 
+.pokeball{
+    text-align: center;
+}
+
 .grass{
     background-color: rgb(92, 184, 92) !important;
     }

@@ -6,7 +6,7 @@
 import { onMounted, ref } from "vue";
 
 // Variavel para exibir o carregamento
-let carregamento = ref(true);
+let pokeball = ref(true);
 
 // Vetor contendo os Pokemons
 const vetor = ref([]);
@@ -25,7 +25,7 @@ onMounted(async () => {
         console.error("Erro ao buscar dados:", error);
     }
 
-    
+
 
     // Opção 2 do professor
 
@@ -43,17 +43,15 @@ onMounted(async () => {
 <!-- HTML -->
 <template>
 
-    <h1>Primeira geração</h1>
+    <div class="pokeball" v-if="pokeball">
+        <img src="../complementos/pokeball.gif" alt="">
+    </div>
 
     <!-- <ul>
         <li v-for="pokemon in vetor" :key="pokemon.id">
             {{ pokemon.name }}
         </li>
     </ul>    -->
-
-    <div class="pokeball" v-if="pokeball">
-        <img src="../complementos/pokeball.gif" alt="">
-    </div>
 
 
     <main class="container" v-if="!pokeball">
