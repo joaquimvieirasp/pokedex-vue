@@ -11,6 +11,9 @@ let pokeball = ref(true);
 // Vetor contendo os Pokemons
 const vetor = ref([]);
 
+// Variável para aramzenar o termo da filtragem
+let termoFiltragem = ref('');
+
 onMounted(async () => {
 
     //Opção 1 
@@ -38,6 +41,12 @@ onMounted(async () => {
     pokeball.value = false;
 
 });
+
+    // Função para filtrar os Pokémons
+    function filtrar(){
+        return vetor.value.filter(obj => obj.name.includes(termoFiltragem.value));
+    }
+
 </script>
 
 <!-- HTML -->
@@ -56,9 +65,25 @@ onMounted(async () => {
 
     <main class="container" v-if="!pokeball">
 
+
+        {{ termoFiltragem }}
+        <!-- Filtragem -->
+
+        <div class="row">
+            <div class="col-12">
+                <input type="text" v-model="termoFiltragem" placeholder="Qual Pokémon você está procurando?" class="form-control pesquisa">
+
+                <p v-if="filtrar().length == 0">Não foi encontrado nenhum Pokémon</p>
+                <p v-else-if="filtrar().length == 1">Foi encontrado apenas um Pokémon</p>
+                <p v-else>Foram encontrados {{ filtrar().length }} Pokémons</p>
+            </div>
+        </div>
+
+        <!-- Listagem -->
+
         <div class="row">
 
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3" v-for="v in vetor">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3" v-for="v in filtrar()">
 
                 <div class="card" :class="v.types[0].type.name">
                     <img :src="v.sprites.other.home.front_default">
